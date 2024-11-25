@@ -49,9 +49,5 @@ Toda a documentação do projeto está disponível na pasta `/docs`, incluindo:
 - Diagramas
 - Descrição das funcionalidades
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT.
-
 ---
 Desenvolvido com ❤️ pela equipe da disciplina de Banco de Dados
