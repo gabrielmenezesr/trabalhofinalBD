@@ -1,0 +1,107 @@
+@startuml Sistema de Gestão de Clínica Médica
+
+skinparam class {
+    BackgroundColor LightBlue
+    ArrowColor Black
+    BorderColor DarkBlue
+}
+
+entity "Especialidade" as especialidade {
+    *id_especialidade : INT <<PK>>
+    --
+    *nome : VARCHAR(50)
+    descricao : TEXT
+    valor_consulta : DECIMAL(10,2)
+}
+
+entity "Medico" as medico {
+    *id_medico : INT <<PK>>
+    --
+    *id_especialidade : INT <<FK>>
+    *nome : VARCHAR(100)
+    *crm : VARCHAR(20)
+    *email : VARCHAR(100)
+    *telefone : VARCHAR(15)
+    dias_atendimento : VARCHAR(100)
+    horario_inicio : TIME
+    horario_fim : TIME
+}
+
+entity "Paciente" as paciente {
+    *id_paciente : INT <<PK>>
+    --
+    *nome : VARCHAR(100)
+    *cpf : VARCHAR(14)
+    *data_nascimento : DATE
+    *email : VARCHAR(100)
+    *telefone : VARCHAR(15)
+    endereco : VARCHAR(200)
+    plano_saude : VARCHAR(50)
+    grupo_sanguineo : VARCHAR(3)
+    alergias : TEXT
+}
+
+entity "Agendamento" as agendamento {
+    *id_agendamento : INT <<PK>>
+    --
+    *id_paciente : INT <<FK>>
+    *id_medico : INT <<FK>>
+    *data_hora : TIMESTAMP
+    *status : ENUM
+    forma_pagamento : VARCHAR(50)
+    valor : DECIMAL(10,2)
+}
+
+entity "Atendimento" as atendimento {
+    *id_atendimento : INT <<PK>>
+    --
+    *id_agendamento : INT <<FK>>
+    *data_inicio : TIMESTAMP
+    data_fim : TIMESTAMP
+    status : ENUM
+    observacoes : TEXT
+}
+
+entity "Prontuario" as prontuario {
+    *id_prontuario : INT <<PK>>
+    --
+    *id_paciente : INT <<FK>>
+    *id_atendimento : INT <<FK>>
+    *data_registro : TIMESTAMP
+    *queixa_principal : TEXT
+    diagnostico : TEXT
+    prescricao : TEXT
+    observacoes : TEXT
+}
+
+entity "Exame" as exame {
+    *id_exame : INT <<PK>>
+    --
+    *id_prontuario : INT <<FK>>
+    *tipo_exame : VARCHAR(100)
+    *data_solicitacao : DATE
+    data_realizacao : DATE
+    resultado : TEXT
+    anexo : BLOB
+}
+
+entity "Medicamento" as medicamento {
+    *id_medicamento : INT <<PK>>
+    --
+    *id_prontuario : INT <<FK>>
+    *nome : VARCHAR(100)
+    *dosagem : VARCHAR(50)
+    *frequencia : VARCHAR(50)
+    duracao : VARCHAR(50)
+    observacoes : TEXT
+}
+
+especialidade ||--|{ medico
+medico ||--o{ agendamento
+paciente ||--o{ agendamento
+agendamento ||--|| atendimento
+atendimento ||--|| prontuario
+prontuario ||--o{ exame
+prontuario ||--o{ medicamento
+
+@enduml
