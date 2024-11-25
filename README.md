@@ -42,12 +42,7 @@ O projeto inclui:
    - DML (Inserção dos dados)
    - DQL (Consultas)
 
-## 📚 Documentação
 
-Toda a documentação do projeto está disponível na pasta `/docs`, incluindo:
-- Modelagem do banco de dados
-- Diagramas
-- Descrição das funcionalidades
 
 ---
 Desenvolvido com ❤️ pela equipe da disciplina de Banco de Dados
